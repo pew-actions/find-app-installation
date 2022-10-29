@@ -1,0 +1,22 @@
+name: 'PlayEveryWare/action-find-app-installation'
+description: 'Finds the installation id for a GitHub application'
+
+inputs:
+  application-id:
+    description: Application id of the GitHub app
+    default: 239145
+    required: true
+  private-key:
+    description: Private key for the application
+  repository-owner:
+    description: Repository owner to check
+    default: 'PlayEveryWare'
+    required: true
+
+outputs:
+  installation-id:
+    description: Id of the application installation
+
+runs:
+  using: node16
+  main: dist/index.js
