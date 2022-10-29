@@ -48,6 +48,21 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const app_1 = __nccwpck_require__(4389);
+function getRepositoryOwner() {
+    const repositoryOwner = core.getInput('repository-owner');
+    if (repositoryOwner) {
+        return repositoryOwner;
+    }
+    const repository = core.getInput('repository');
+    if (!repository) {
+        throw new Error('No repository-owner or repostiory supplied to the action');
+    }
+    const parts = repository.split('/');
+    if (parts.length != 2) {
+        throw new Error(`Malformed repository input '${repository}'`);
+    }
+    return parts[0];
+}
 function run() {
     var e_1, _a;
     return __awaiter(this, void 0, void 0, function* () {
@@ -61,10 +76,7 @@ function run() {
             if (!privateKey) {
                 throw new Error('No private-key supplied to the action');
             }
-            const repositoryOwner = (core.getInput('repository-owner') || '').toLowerCase();
-            if (!repositoryOwner) {
-                throw new Error('No repository-owner supplied to the action');
-            }
+            const repositoryOwner = getRepositoryOwner().toLowerCase();
             // Authenticate as our application
             const app = new app_1.App({
                 appId: applicationId,

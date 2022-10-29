@@ -2,6 +2,25 @@ import * as core from '@actions/core'
 import { Octokit } from '@octokit/core'
 import { App } from '@octokit/app'
 
+function getRepositoryOwner(): string {
+    const repositoryOwner = core.getInput('repository-owner')
+    if (repositoryOwner) {
+      return repositoryOwner
+    }
+
+    const repository = core.getInput('repository')
+    if (!repository) {
+      throw new Error('No repository-owner or repostiory supplied to the action')
+    }
+
+    const parts = repository.split('/')
+    if (parts.length != 2) {
+      throw new Error(`Malformed repository input '${repository}'`)
+    }
+
+    return parts[0]
+}
+
 async function run(): Promise<void> {
 
   try {
@@ -16,10 +35,7 @@ async function run(): Promise<void> {
       throw new Error('No private-key supplied to the action')
     }
 
-    const repositoryOwner = (core.getInput('repository-owner') || '').toLowerCase()
-    if (!repositoryOwner) {
-      throw new Error ('No repository-owner supplied to the action')
-    }
+    const repositoryOwner = getRepositoryOwner().toLowerCase()
 
     // Authenticate as our application
     const app = new App({

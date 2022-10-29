@@ -9,10 +9,11 @@ inputs:
   private-key:
     description: Private key for the application
     required: true
+  repository:
+    description: Repository to check
   repository-owner:
     description: Repository owner to check
     default: 'PlayEveryWare'
-    required: true
 
 outputs:
   installation-id:
