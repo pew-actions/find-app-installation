@@ -13,7 +13,6 @@ inputs:
     description: Repository to check
   repository-owner:
     description: Repository owner to check
-    default: 'PlayEveryWare'
 
 outputs:
   installation-id:
