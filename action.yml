@@ -8,6 +8,7 @@ inputs:
     required: true
   private-key:
     description: Private key for the application
+    required: true
   repository-owner:
     description: Repository owner to check
     default: 'PlayEveryWare'
