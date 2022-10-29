@@ -1,7 +1,7 @@
 {
-  "name": "action-app-installation-pat",
+  "name": "action-find-app-installation",
   "version": "1.0.0",
-  "description": "GitHub action to generate a GitHub Personal access token for an App installation",
+  "description": "GitHub action to locate the installation id for a GitHub application",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc && ncc build"
